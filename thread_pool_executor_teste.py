@@ -109,8 +109,7 @@ if __name__ == "__main__":
                 plt.annotate(f'{threadpool_execution_times[i-1]:.2f}', (num_urls[i-1], threadpool_execution_times[i-1]), 
                              textcoords="offset points", xytext=(0,10), ha='center', fontsize=12)
                 
-    list_ticks = [i for i in range(1, len(num_urls) + 1)]
-    plt.xticks(list_ticks)
+    plt.xticks(num_urls)
     plt.gca().spines['top'].set_visible(False)
     plt.gca().spines['right'].set_visible(False)
     plt.tight_layout()
