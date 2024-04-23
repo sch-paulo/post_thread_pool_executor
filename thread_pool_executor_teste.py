@@ -59,7 +59,7 @@ def measure_execution_time(urls_list, execution_function):
 if __name__ == "__main__":
     urls = [
         "https://www.google.com",
-        "https://www.youtube.com"
+        "https://www.youtube.com",
         "https://www.instagram.com",
         "https://www.facebook.com",
         "https://www.linkedin.com",
@@ -92,24 +92,23 @@ if __name__ == "__main__":
         num_urls.append(i)
 
     plt.figure(figsize=(10,6))
-    plt.plot(num_urls, normal_execution_times, label='Execução convencional')
-    plt.plot(num_urls, threadpool_execution_times, label='Execução com ThreadPoolExecutor')
+    plt.plot(num_urls, normal_execution_times, label='Execução convencional', color='blue')
+    plt.plot(num_urls, threadpool_execution_times, label='Execução com ThreadPoolExecutor', color='orange')
     plt.xlabel('Número de URLs')
     plt.ylabel('Tempo de execução (s)')
     plt.title('Diferença no tempo de execução com o aumento da complexidade da tarefa')
     
     # Adicionando marcador e rótulo
     for i in num_urls:
-        if i % 3 == 0:
-            print(i)
-            plt.scatter(num_urls[i-1], normal_execution_times[i-1])
-            plt.annotate(f'{normal_execution_times[i-1]:.2f}', (num_urls[i-1], normal_execution_times[i-1]), 
-                         textcoords="offset points", xytext=(0,10), ha='center', fontsize=12)
-
-            plt.scatter(num_urls[i-1], threadpool_execution_times[i-1])
-            plt.annotate(f'{threadpool_execution_times[i-1]:.2f}', (num_urls[i-1], threadpool_execution_times[i-1]), 
-                         textcoords="offset points", xytext=(0,10), ha='center', fontsize=12)
-
+            if i % 3 == 0 and i != 6:
+                plt.scatter(num_urls[i-1], normal_execution_times[i-1], color='blue')
+                plt.annotate(f'{normal_execution_times[i-1]:.2f}', (num_urls[i-1], normal_execution_times[i-1]), 
+                             textcoords="offset points", xytext=(0,10), ha='center', fontsize=12)
+    
+                plt.scatter(num_urls[i-1], threadpool_execution_times[i-1], color='orange')
+                plt.annotate(f'{threadpool_execution_times[i-1]:.2f}', (num_urls[i-1], threadpool_execution_times[i-1]), 
+                             textcoords="offset points", xytext=(0,10), ha='center', fontsize=12)
+                
     list_ticks = [i for i in range(1, len(num_urls) + 1)]
     plt.xticks(list_ticks)
     plt.gca().spines['top'].set_visible(False)
